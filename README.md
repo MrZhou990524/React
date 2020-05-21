@@ -1,14 +1,16 @@
 # 学习 React
 
-![React Logo](./my-app/public/logo192.png)
+![React Logo](./public/logo192.png)
 
 ## React 是什么？
 
 React 是一个声明式，高效且灵活的用于构建用户界面的 JavaScript 库。
 
+> 注意是库不是框架。React 官方把 React 定义为库。跟 Vue 有所区别
+
 ## 安装 React
 
-```
+```cmd
 npx create-react-app my-app
 cd my-app
 npm start
@@ -18,7 +20,7 @@ npm start
 
 **JSX，是一个 JavaScript 的语法扩展。**
 
-```
+```JavaScript
 const element = <h1>Hello, world!</h1>;
 ```
 
@@ -28,7 +30,7 @@ JSX 可以生成 React 元素
 
 我们声明了一个名为 name 的变量，然后在 JSX 中使用它，并将它包裹在大括号中：
 
-```
+```JavaScript
 const name = 'Josh Perez';
 const element = <h1>Hello, {name}</h1>;
 
@@ -44,7 +46,7 @@ ReactDOM.render(
 
 可以在 if 语句与 for 循环中使用 JSX,将 JSX 赋值给变量，把 JSX 当作参数传入，以及从函数中返回 JSX
 
-```
+```JavaScript
 function getGreeting(user) {
   if (user) {
     return <h1>Hello, {formatName(user)}!</h1>;
@@ -57,13 +59,13 @@ function getGreeting(user) {
 
 可以通过引号，将属性值指定为字符串字面量
 
-```
+```JavaScript
 const element = <div tabIndex="0"></div>;
 ```
 
 也可以使用大括号，来在属性值中插入一 JavaScript 表达式
 
-```
+```JavaScript
 const element = <img src={user.avatarUrl}></img>;
 ```
 
@@ -71,13 +73,13 @@ const element = <img src={user.avatarUrl}></img>;
 
 假如一个标签里面没有内容，你可以使用 /> 来闭合标签，就像 XML 语法一样
 
-```
+```JavaScript
 const element = <img src={user.avatarUrl} />;
 ```
 
 SX 标签里能够包含很多子元素
 
-```
+```JavaScript
 const element = (
   <div>
     <h1>Hello!</h1>
@@ -88,7 +90,7 @@ const element = (
 
 JSX 下只能有一个根标签，多个根标签会报错
 
-```
+```JavaScript
 const element = (
   <div></div>
   <h1>Hello!</h1>
@@ -98,7 +100,7 @@ const element = (
 
 如果一定要使用两个根标签可以用以下方法
 
-```
+```JavaScript
 const element = (
   <>
     <div></div>
@@ -112,7 +114,7 @@ const element = (
 
 可以安全地在 JSX 当中插入用户输入内容
 
-```
+```JavaScript
 const title = response.potentiallyMaliciousInput;
 // 直接使用是安全的：
 const element = <h1>{title}</h1>;
@@ -124,7 +126,7 @@ React DOM 在渲染所有输入内容之前，默认会进行转义。它可以�
 
 Babel 会把 JSX 转译成一个名为 React.createElement() 函数调用。
 
-```
+```JavaScript
 const element = (
   <h1 className="greeting">
     Hello, world!
@@ -132,7 +134,7 @@ const element = (
 );
 ```
 
-```
+```JavaScript
 const element = React.createElement(
   'h1',
   {className: 'greeting'},
@@ -144,7 +146,7 @@ const element = React.createElement(
 
 React.createElement() 会预先执行一些检查，以帮助你编写无错代码，但实际上它创建了一个这样的对象
 
-```
+```JavaScript
 // 注意：这是简化过的结构
 const element = {
   type: 'h1',
@@ -161,7 +163,7 @@ const element = {
 
 **元素是构成 React 应用的最小砖块**
 
-```
+```JavaScript
 const element = <h1>Hello, world</h1>;
 ```
 
@@ -171,8 +173,8 @@ const element = <h1>Hello, world</h1>;
 
 在你的 index.html 文件里有一个
 
-```
-<div id="root"><div/>
+```html
+<div id="root"><div /></div>
 ```
 
 我们将其称为“根” DOM 节点，因为该节点内的所有内容都将由 React DOM 管理。
@@ -181,7 +183,7 @@ const element = <h1>Hello, world</h1>;
 
 想要将一个 React 元素渲染到根 DOM 节点中，只需把它们一起传入 ReactDOM.render()
 
-```
+```JavaScript
 const element = <h1>Hello, world</h1>;
 ReactDOM.render(element, document.getElementById('root'));
 
@@ -196,7 +198,7 @@ React 元素是不可变对象。一旦被创建，你就无法更改它的子�
 
 用一个计时器来加深理解
 
-```
+```JavaScript
 function tick() {
   const element = (
     <div>
@@ -220,8 +222,80 @@ React DOM 会将元素和它的子元素与它们之前的状态进行比较，�
 
 ![定时器例子](https://react.docschina.org/c158617ed7cc0eac8f58330e49e48224/granular-dom-updates.gif)
 
-## 组件 & Props
+## 组件
 
-组件允许你将 UI 拆分为独立可复用的代码片段，并对每个片段进行独立构思。本指南旨在介绍组件的相关理念。你可以参考详细组件 API。
+1. 组件允许你将 UI 拆分为独立可复用的代码片段，并对每个片段进行独立构思。本指南旨在介绍组件的相关理念。你可以参考详细组件 API。
 
-组件，从概念上类似于 JavaScript 函数。它接受任意的入参（即 “props”），并返回用于描述页面展示内容的 React 元素。
+1. 组件，从概念上类似于 JavaScript 函数。它接受任意的入参（即 “props”），并返回用于描述页面展示内容的 React 元素。也可以用 ES6 class 来定义一个组件。
+
+1. 组件的命名，开头字母需要大写。
+
+1. 组件通过 props 来接收任意参数
+
+```JavaScript
+<Message />
+//这是一个自定义组件
+```
+
+> 封装一个 React 组件
+
+```JavaScript
+function HelloMessage(props) {
+    return <h1>Hello World!</h1>;
+}
+```
+
+> 用一个 ES6 class 定义一组件
+
+```JavaScript
+class HelloMeassage extends RecatComponent {
+  render (){
+    return <h1>Hello,World!</h1>;
+  }
+}
+```
+
+> 用 props 接收参数
+
+```JavaScript
+function HelloMessage(props) {
+    return <h1>Hello,{props.name}</h1>;
+}
+
+const element = <HelloMessage name='普朗特' />
+
+ReactDOM.render(
+  element,
+  document.getElementById('root')
+);
+
+//输出  > Hello,普朗特
+
+```
+
+### 组件嵌套
+
+用 React 组件嵌套可以把其他组件组合成一个具有完整功能的组件
+
+```JavaScript
+
+function Name(props) {
+  return <h1>name:{props.name}</h1>
+}
+
+function Age(props) {
+  return <h1>Age:{props.age}</h1>
+}
+
+function App() {
+  return (
+    <div>
+      <Name name="米老鼠" />
+      <Age age="10岁" />
+    </div>
+  )
+}
+
+ReactDOM.render(<App />, document.getElementById('root'))
+//迪士尼律师函警告
+```
