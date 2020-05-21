@@ -1,6 +1,6 @@
 # 学习 React
 
-![React Logo](https://github.com/MrZhou990524/React/tree/master/public/logo192.png)
+![React Logo](https://github.com/MrZhou990524/React/raw/master/public/logo192.png)
 
 ## React 是什么？
 
